@@ -9,8 +9,8 @@
 
 # Project exclude paths
 /out/
-/.idea/sonarlint
-.idea
+/.ideasonarlint
+.idea8/
 
 # Compiled class file
 *.class
