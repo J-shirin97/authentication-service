@@ -10,7 +10,7 @@ import java.util.List;
 public interface PersonMapper {
     Person toPerson(PersonDto personDto);
 
-    PersonDto toPerosnDTO(Person person);
+    PersonDto toPersonDTO(Person person);
 
     List<PersonDto> toPersonDTO(List<Person> personList);
 

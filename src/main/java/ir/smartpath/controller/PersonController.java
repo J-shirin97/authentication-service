@@ -1,6 +1,5 @@
 package ir.smartpath.controller;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import ir.smartpath.Mapper.PersonMapper;
 import ir.smartpath.dto.PersonDto;
 import ir.smartpath.entity.Person;
@@ -31,16 +30,14 @@ public class PersonController {
     @GetMapping("/v1/{id}")
     public ResponseEntity<PersonDto> getById(@PathVariable Long id) {
         Person person = personService.getById(id);
-        PersonDto personDto = personMapper.toPerosnDTO(person);
+        PersonDto personDto = personMapper.toPersonDTO(person);
         return ResponseEntity.ok(personDto);
     }
-
 
     @GetMapping("/v1")
     public ResponseEntity<List<PersonDto>> getAll() {
         List<Person> personList = personService.getAll();
         List<PersonDto> personDtoList = personMapper.toPersonDTO(personList);
         return ResponseEntity.ok(personDtoList);
-
     }
 }
