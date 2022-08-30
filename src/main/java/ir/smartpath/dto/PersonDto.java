@@ -19,7 +19,7 @@ public class PersonDto {
     private String lastName;
 
     @ApiModelProperty(required = true, hidden = false)
-    private Long nationalCode;
+    private String nationalCode;
 
     @ApiModelProperty(required = true, hidden = false)
     private Integer age;

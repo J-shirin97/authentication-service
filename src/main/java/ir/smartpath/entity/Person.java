@@ -21,7 +21,7 @@ public class Person {
     private String lastName;
 
     @Column(name = "nationalCode", unique = true)
-    private Long nationalCode;
+    private String nationalCode;
 
     @Column(name = "age")
     private Integer age;
@@ -33,8 +33,7 @@ public class Person {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "password", length = 128)
     private String password;
-
 
 }
