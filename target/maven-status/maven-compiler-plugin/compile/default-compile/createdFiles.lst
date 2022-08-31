@@ -1,6 +1,8 @@
 ir\smartpath\entity\Person.class
+ir\smartpath\dto\BaseDTO.class
 ir\smartpath\Mapper\PersonMapper.class
-ir\smartpath\dto\PersonDto.class
+ir\smartpath\dto\PersonDTO.class
+ir\smartpath\config\CaffeineCacheConfig.class
 ir\smartpath\entity\enumuration\Gender.class
 ir\smartpath\Mapper\PersonMapperImpl.class
 ir\smartpath\Application.class
@@ -8,6 +10,7 @@ ir\smartpath\service\IPersonService.class
 ir\smartpath\controller\PersonController.class
 ir\smartpath\repository\PersonRepository.class
 ir\smartpath\service\PersonService.class
+ir\smartpath\entity\BaseEntity.class
 ir\smartpath\dto\LoginDTO.class
 ir\smartpath\utils\FibonacciAlgorithm.class
 ir\smartpath\utils\PasswordManager.class

@@ -15,7 +15,10 @@ spring:
     database: POSTGRESQL
     open-in-view: false
     generate-ddl: true
-
+  cache:
+    cache-names: number
+    caffeine:
+      spec: maximumSize=500,expireAfterAccess=600s
 
 
 

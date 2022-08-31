@@ -2,7 +2,7 @@ package ir.smartpath.controller;
 
 import ir.smartpath.Mapper.PersonMapper;
 import ir.smartpath.dto.LoginDTO;
-import ir.smartpath.dto.PersonDto;
+import ir.smartpath.dto.PersonDTO;
 import ir.smartpath.entity.Person;
 import ir.smartpath.service.IPersonService;
 import ir.smartpath.utils.FibonacciAlgorithm;
@@ -25,7 +25,7 @@ public class PersonController {
     private final FibonacciAlgorithm fibonacciAlgorithm;
 
     @PostMapping("/v1")
-    public ResponseEntity<Void> saveNew(@RequestBody PersonDto personDto) {
+    public ResponseEntity<Void> saveNew(@RequestBody PersonDTO personDto) {
         Person person = personMapper.toPerson(personDto);
         personService.save(person);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -37,23 +37,20 @@ public class PersonController {
     }
 
     @GetMapping("/v1/{id}")
-    public ResponseEntity<PersonDto> getById(@PathVariable Long id) {
+    public ResponseEntity<PersonDTO> getById(@PathVariable Long id) {
         Person person = personService.getById(id);
-        PersonDto personDto = personMapper.toPersonDTO(person);
+        PersonDTO personDto = personMapper.toPersonDTO(person);
         return ResponseEntity.ok(personDto);
     }
 
     @GetMapping("/v1")
-    public ResponseEntity<List<PersonDto>> getAll() {
+    public ResponseEntity<List<PersonDTO>> getAll() {
         List<Person> personList = personService.getAll();
-        List<PersonDto> personDtoList = personMapper.toPersonDTO(personList);
-        return ResponseEntity.ok(personDtoList);
+        List<PersonDTO> personDTOList = personMapper.toPersonDTO(personList);
+        return ResponseEntity.ok(personDTOList);
     }
     @PostMapping("/v3")
     public int fib(@RequestBody int number){
         return fibonacciAlgorithm.calc(number);
     }
-
-
-
 }

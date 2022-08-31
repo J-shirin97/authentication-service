@@ -4,13 +4,9 @@ import io.swagger.annotations.ApiModelProperty;
 import ir.smartpath.entity.enumuration.Gender;
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
-
 @Data
-public class PersonDto {
-    @NotNull
-    @ApiModelProperty(required = false, hidden = true)
-    private Long id;
+public class PersonDTO extends BaseDTO {
+
 
     @ApiModelProperty(required = true, hidden = false)
     private String firstName;
