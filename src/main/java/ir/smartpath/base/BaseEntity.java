@@ -1,4 +1,4 @@
-package ir.smartpath.entity;
+package ir.smartpath.base;
 
 import lombok.Data;
 import org.springframework.data.annotation.CreatedBy;

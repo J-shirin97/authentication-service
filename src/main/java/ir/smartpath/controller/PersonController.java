@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/Person")
 @AllArgsConstructor
 public class PersonController {
     private final IPersonService personService;
@@ -24,33 +24,36 @@ public class PersonController {
     private final PasswordManager passwordManager;
     private final FibonacciAlgorithm fibonacciAlgorithm;
 
-    @PostMapping("/v1")
+    @PostMapping("/PersonSave")
     public ResponseEntity<Void> saveNew(@RequestBody PersonDTO personDto) {
         Person person = personMapper.toPerson(personDto);
         personService.save(person);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PostMapping("/v2")
+    @PostMapping("/UserLogin")
     public ResponseEntity<Void> login(@RequestBody LoginDTO loginDTO, HttpSession httpSession) {
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
-    @GetMapping("/v1/{id}")
+    @GetMapping("/GetById/{id}")
     public ResponseEntity<PersonDTO> getById(@PathVariable Long id) {
         Person person = personService.getById(id);
         PersonDTO personDto = personMapper.toPersonDTO(person);
         return ResponseEntity.ok(personDto);
     }
 
-    @GetMapping("/v1")
+    @GetMapping("/GetAll")
     public ResponseEntity<List<PersonDTO>> getAll() {
         List<Person> personList = personService.getAll();
         List<PersonDTO> personDTOList = personMapper.toPersonDTO(personList);
         return ResponseEntity.ok(personDTOList);
     }
-    @PostMapping("/v3")
-    public int fib(@RequestBody int number){
+
+    @GetMapping("/FibonacciAlgorithm")
+    public int fib(int number) {
         return fibonacciAlgorithm.calc(number);
     }
 }
+
+

@@ -1,6 +1,7 @@
 package ir.smartpath.dto;
 
 import io.swagger.annotations.ApiModelProperty;
+import ir.smartpath.base.BaseDTO;
 import ir.smartpath.entity.enumuration.Gender;
 import lombok.Data;
 

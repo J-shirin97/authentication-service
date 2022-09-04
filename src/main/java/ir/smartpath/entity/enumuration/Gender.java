@@ -1,6 +1,10 @@
 package ir.smartpath.entity.enumuration;
 
 public enum Gender {
-   MALE,
-   FEMALE,
+    Male(1),
+    FEMALE(2);
+
+    Gender(int gen) {
+
+    }
 }

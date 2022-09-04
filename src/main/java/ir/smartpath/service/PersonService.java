@@ -12,12 +12,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
-
-@AllArgsConstructor
 @Service
+@AllArgsConstructor
 @CacheConfig(cacheNames = {"number"})
 public class PersonService implements IPersonService {
     private static final Logger LOG = LoggerFactory.getLogger(PersonService.class);
@@ -39,12 +39,16 @@ public class PersonService implements IPersonService {
 
     @Override
     public Person getById(Long id) {
-        Optional<Person> optionalPerson = personRepository.findById(id);
-        if (!optionalPerson.isPresent()) {
-            //
+        try {
+            Optional<Person> optionalPerson = personRepository.findById(id);
+            if (optionalPerson.isEmpty()) {
+                return null;
+            } else {
+                return optionalPerson.get();
+            }
+        } catch (Exception exception) {
+            throw new RuntimeException();
         }
-        return optionalPerson.get();
-
     }
 
     @Override
@@ -73,8 +77,9 @@ public class PersonService implements IPersonService {
 
     @Cacheable
     public int getNumber(int number) {
-        LOG.info("Fibonacci{}",number);
+        LOG.info("Fibonacci{}", number);
         return fibonacciAlgorithm.calc(number);
     }
 }
+
 

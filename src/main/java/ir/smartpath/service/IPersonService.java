@@ -1,8 +1,6 @@
 package ir.smartpath.service;
 
 import ir.smartpath.entity.Person;
-import ir.smartpath.utils.FibonacciAlgorithm;
-import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-08-31T22:29:01+0430",
+    date = "2022-09-04T10:42:25+0430",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.4.1 (Amazon.com Inc.)"
 )
 @Component
@@ -24,11 +24,7 @@ public class PersonMapperImpl implements PersonMapper {
         Person person = new Person();
 
         person.setId( personDto.getId() );
-        person.setVersion( personDto.getVersion() );
         person.setCreatedDate( personDto.getCreatedDate() );
-        person.setCreatedBy( personDto.getCreatedBy() );
-        person.setLastModifiedDate( personDto.getLastModifiedDate() );
-        person.setLastModifiedBy( personDto.getLastModifiedBy() );
         person.setFirstName( personDto.getFirstName() );
         person.setLastName( personDto.getLastName() );
         person.setNationalCode( personDto.getNationalCode() );
@@ -49,11 +45,7 @@ public class PersonMapperImpl implements PersonMapper {
         PersonDTO personDTO = new PersonDTO();
 
         personDTO.setId( person.getId() );
-        personDTO.setVersion( person.getVersion() );
         personDTO.setCreatedDate( person.getCreatedDate() );
-        personDTO.setCreatedBy( person.getCreatedBy() );
-        personDTO.setLastModifiedDate( person.getLastModifiedDate() );
-        personDTO.setLastModifiedBy( person.getLastModifiedBy() );
         personDTO.setFirstName( person.getFirstName() );
         personDTO.setLastName( person.getLastName() );
         personDTO.setNationalCode( person.getNationalCode() );
