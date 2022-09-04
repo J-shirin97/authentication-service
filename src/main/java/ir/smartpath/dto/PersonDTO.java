@@ -8,7 +8,6 @@ import lombok.Data;
 @Data
 public class PersonDTO extends BaseDTO {
 
-
     @ApiModelProperty(required = true, hidden = false)
     private String firstName;
 
