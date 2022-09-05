@@ -11,7 +11,6 @@ import org.springframework.cache.annotation.EnableCaching;
 @Slf4j
 public class Application {
 
-
     public static void main(String[] args) {
         SpringApplication.run(Application.class);
         log.info("Springboot caffeine cache application is started successfully");

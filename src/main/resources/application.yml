@@ -6,10 +6,6 @@ spring:
     url: jdbc:postgresql://localhost:5432/authentication-db
     username: postgres
     password: 12345
-    tomcat:
-      test-while-idle: true
-
-
   jpa:
     hibernate:
       ddl-auto: update
@@ -22,6 +18,5 @@ spring:
     cache-names: number
     caffeine:
       spec: maximumSize=500,expireAfterAccess=600s
-
   main:
     allow-circular-references: true

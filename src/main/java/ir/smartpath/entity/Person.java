@@ -29,7 +29,6 @@ public class Person {
     @Column(name = "lastName")
     private String lastName;
 
-    /*@Pattern(regexp = "[0-9]*")*/
     @NationalCode
     @PositiveOrZero
     @Column(name = "nationalCode", unique = true, length = 10)
@@ -48,7 +47,7 @@ public class Person {
     private Boolean active;
 
 
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY )
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "person_role", joinColumns = @JoinColumn(name = "person"), inverseJoinColumns = @JoinColumn(name = "role"))
      private Set<Role> roles;
 

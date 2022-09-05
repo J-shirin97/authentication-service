@@ -24,7 +24,7 @@ public class PersonService implements IPersonService {
 
     private final PersonRepository personRepository;
     private final RoleRepository roleRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
     private final FibonacciAlgorithm fibonacciAlgorithm;
 
     @Override

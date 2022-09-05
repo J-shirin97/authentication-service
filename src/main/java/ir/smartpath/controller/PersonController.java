@@ -3,6 +3,7 @@ package ir.smartpath.controller;
 
 import ir.smartpath.entity.Person;
 import ir.smartpath.service.IPersonService;
+import ir.smartpath.utils.FibonacciAlgorithm;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -63,6 +64,11 @@ public class PersonController {
                 + " " + person.getLastName() + " (" + person.getEmail() + ")");
         modelAndView.setViewName("fibo/home");
         return modelAndView;
+    }
+
+    @PostMapping("/calc")
+    public int calc(@RequestBody int number) {
+        return new FibonacciAlgorithm().calc(number);
     }
 }
 
