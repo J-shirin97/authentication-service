@@ -1,6 +1,6 @@
 package ir.smartpath.entity;
 
-import ir.smartpath.base.BaseEntity;
+
 import ir.smartpath.entity.enumuration.Gender;
 import ir.smartpath.validator.NationalCode;
 import lombok.Data;
@@ -9,12 +9,19 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.sql.Timestamp;
+import java.util.Set;
 
 
 @Entity
 @Table(name = "person_table")
 @Data
-public class Person extends BaseEntity {
+public class Person {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id" , nullable=false)
+    private Long id;
+
 
     @Column(name = " firstName")
     private String firstName;
@@ -22,9 +29,9 @@ public class Person extends BaseEntity {
     @Column(name = "lastName")
     private String lastName;
 
-    /*@Pattern(regexp = "\b([1-9]|0)")*/
+    /*@Pattern(regexp = "[0-9]*")*/
     @NationalCode
-    @Digits(integer = 10, fraction = 0)
+    @PositiveOrZero
     @Column(name = "nationalCode", unique = true, length = 10)
     private String nationalCode;
 
@@ -36,6 +43,14 @@ public class Person extends BaseEntity {
     @Column(name = "gender")
     private Gender gender;
 
+
+    @Column(name = "active")
+    private Boolean active;
+
+
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY )
+    @JoinTable(name = "person_role", joinColumns = @JoinColumn(name = "person"), inverseJoinColumns = @JoinColumn(name = "role"))
+     private Set<Role> roles;
 
     @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}", flags = Pattern.Flag.CASE_INSENSITIVE)
     @Column(name = "email")

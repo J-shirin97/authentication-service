@@ -1,59 +1,71 @@
 package ir.smartpath.controller;
 
-import ir.smartpath.Mapper.PersonMapper;
-import ir.smartpath.dto.LoginDTO;
-import ir.smartpath.dto.PersonDTO;
+
 import ir.smartpath.entity.Person;
 import ir.smartpath.service.IPersonService;
-import ir.smartpath.utils.FibonacciAlgorithm;
-import ir.smartpath.utils.PasswordManager;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
-import java.util.List;
+import javax.validation.Valid;
+
 
 @RestController
-@RequestMapping("/Person")
+@RequestMapping("/person")
 @AllArgsConstructor
 public class PersonController {
     private final IPersonService personService;
-    private final PersonMapper personMapper;
-    private final PasswordManager passwordManager;
-    private final FibonacciAlgorithm fibonacciAlgorithm;
 
-    @PostMapping("/PersonSave")
-    public ResponseEntity<Void> saveNew(@RequestBody PersonDTO personDto) {
-        Person person = personMapper.toPerson(personDto);
-        personService.save(person);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+
+    @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
+    public ModelAndView login() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("login");
+        return modelAndView;
     }
 
-    @PostMapping("/UserLogin")
-    public ResponseEntity<Void> login(@RequestBody LoginDTO loginDTO, HttpSession httpSession) {
-        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    @GetMapping("/register")
+    public ModelAndView registration(@PathVariable Person person) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("person", person);
+        modelAndView.setViewName("register");
+        return modelAndView;
     }
 
-    @GetMapping("/GetById/{id}")
-    public ResponseEntity<PersonDTO> getById(@PathVariable Long id) {
-        Person person = personService.getById(id);
-        PersonDTO personDto = personMapper.toPersonDTO(person);
-        return ResponseEntity.ok(personDto);
+    @PostMapping("/register")
+    public ModelAndView createNewPerson(@RequestBody @Valid Person person, BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView();
+        Person personExist = personService.findPersonByNationalCode(person.getNationalCode());
+        if (personExist != null) {
+            bindingResult.rejectValue("nationalCode", "error.user"
+                    , "There is already a user register with the user name provided.");
+        }
+        if (bindingResult.hasErrors()) {
+            modelAndView.setViewName("register");
+        } else {
+            personService.save(person);
+            modelAndView.addObject("successMessage", "User has been registered successfully");
+            modelAndView.addObject("person", new Person());
+            modelAndView.setViewName("register");
+        }
+        return modelAndView;
     }
 
-    @GetMapping("/GetAll")
-    public ResponseEntity<List<PersonDTO>> getAll() {
-        List<Person> personList = personService.getAll();
-        List<PersonDTO> personDTOList = personMapper.toPersonDTO(personList);
-        return ResponseEntity.ok(personDTOList);
-    }
-
-    @GetMapping("/FibonacciAlgorithm")
-    public int fib(int number) {
-        return fibonacciAlgorithm.calc(number);
+    @GetMapping("/fibo/home")
+    public ModelAndView fibo(@PathVariable Integer number) {
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Person person = personService.findPersonByNationalCode(auth.getName());
+        modelAndView.addObject("username", "welcome " + person.getNationalCode() + "/" + person.getFirstName()
+                + " " + person.getLastName() + " (" + person.getEmail() + ")");
+        modelAndView.setViewName("fibo/home");
+        return modelAndView;
     }
 }
+
+
 
 

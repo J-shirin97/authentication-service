@@ -1,12 +1,16 @@
 package ir.smartpath.dto;
 
 import io.swagger.annotations.ApiModelProperty;
-import ir.smartpath.base.BaseDTO;
 import ir.smartpath.entity.enumuration.Gender;
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
+
 @Data
-public class PersonDTO extends BaseDTO {
+public class PersonDTO {
+    @NotNull
+    @ApiModelProperty(required = false, hidden = true)
+    private Long id;
 
     @ApiModelProperty(required = true, hidden = false)
     private String firstName;
