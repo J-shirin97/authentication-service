@@ -4,13 +4,13 @@ import ir.smartpath.dto.RoleDTO;
 import ir.smartpath.entity.Role;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.processing.Generated;
+import javax.annotation.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-09-06T00:33:29+0430",
-    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 18.0.1.1 (Oracle Corporation)"
+    date = "2024-07-08T14:52:12+0330",
+    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_362 (Private Build)"
 )
 @Component
 public class RoleMapperImpl implements RoleMapper {

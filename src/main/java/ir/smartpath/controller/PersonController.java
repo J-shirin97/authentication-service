@@ -28,13 +28,13 @@ public class PersonController {
         return modelAndView;
     }
 
-    @GetMapping("/register")
-    public ModelAndView registration(@PathVariable Person person) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("person", person);
-        modelAndView.setViewName("register");
-        return modelAndView;
-    }
+//    @GetMapping("/register")
+//    public ModelAndView registration(@PathVariable Person person) {
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.addObject("person", person);
+//        modelAndView.setViewName("register");
+//        return modelAndView;
+//    }
 
     @PostMapping("/register")
     public ModelAndView createNewPerson(@RequestBody @Valid Person person, BindingResult bindingResult) {
